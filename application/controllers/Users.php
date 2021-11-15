@@ -13,21 +13,28 @@ class Users extends RestController {
         $this->load->model('users_model');
     }
 
+
+    /**
+     * @author: hola@alvarobreton.com
+     * Endpoint: http://localhost/chatbot_yana/users/login
+     * Headers: X-API-KEY = It is obtained from the database [Table: keys]
+     * Body form-data: email, password
+     * Status documentation: https://restfulapi.net/http-status-codes/
+     */
     public function login_post()
     {
         $email      = $this->input->post('email');
         $password   = $this->input->post('password');
+        $status     = 401;
 
         $users = new Users_model();
 
         $users->setEmail($email);
         $users->setPassword($password);
 
-        $result = $users->login();
-
-        $response = array(
-			'err'			=>	$result['err']
-		);
-		$this->response($response, 200);
+        $response = $users->login();
+        if($response['err'])
+            $status = 200;
+		$this->response($response, $status);
     }
 }

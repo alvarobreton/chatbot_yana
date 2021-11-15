@@ -29,10 +29,11 @@ class Users_model  extends CI_Model  {
     {
         return $this->password;
     }
-
+    
     public function login()
     {
-        $response['err'] = false;
+        $response['err']        = false;
+        $response['message']    = "Incorrect username or password";
         $result = $this->db->where('email', $this->getEmail())
                     ->get('users');
 
@@ -41,6 +42,8 @@ class Users_model  extends CI_Model  {
             $user = $result->row();
             
             $response['err'] = password_verify($this->getPassword(),$user->password);
+            if($response['err'])
+                $response['message'] = "Bienvenido ".$user->name.", me da gusto volverte a ver";
         }
 
         return $response;
