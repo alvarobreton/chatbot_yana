@@ -12,18 +12,66 @@ class Bot extends RestController {
         $this->load->library('form_validation');
         $this->load->model('users_model');
         $this->load->model('conversation_model');
+        $this->load->model('usercases_model');
     }
 
+    /**
+     * @author: hola@alvarobreton.com
+     * @method: POST
+     * Endpoint: http://localhost/chatbot_yana/bot/conversation
+     * Headers: X-API-KEY = It is obtained from the database [Table: keys]
+     * Body form-data: email, password
+     * Status documentation: https://restfulapi.net/http-status-codes/
+     * 
+     * Desarrolla un endpoint que maneje la lógica conversacional entre el usuario y la máquina.
+     */
     public function conversation_post()
     {
         $api = $this->_head_args['X-API-KEY'];
+        $response['success'] = FALSE;
 
-        $users = new Users_model();
-        $users->setApi($api);
+        if ($this->form_validation->run('conversation_post')) 
+        {
+            $user_case = $this->input->post('user_case');
+            $users = new Users_model();
+            $users->setApi($api);
 
-        $getUser = $users->getUser();
+            $getUser = $users->getUser();
 
-        $this->response($getUser->id, 200);
+            if($getUser->id)
+            {
+                $userCases = new UserCases_model();
+                $userCases->setUserId($getUser->id);
+                $userCases->setCaseId($user_case);
+                $userCase = $userCases->getUserCases();
+
+                if(empty($userCase))
+                {
+                    $response['message'] = 'There is no registered case';
+                    $status = 406;
+                }
+                else
+                {
+                    #conversation
+                    $status = 200;
+
+                    
+
+                }
+            }
+            else
+            {
+                $status = 401;
+                $response['message'] = 'User not found';
+            }
+        }
+        else
+        {
+            $status = 400;
+            $response['errors'] = $this->form_validation->get_errores_arreglo();
+        }
+
+        $this->response($response, $status);
 
 
     }

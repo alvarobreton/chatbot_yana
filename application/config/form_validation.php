@@ -14,6 +14,12 @@ $config = array(
 			array( 'field'=> 'email', 'label'=>'email','rules'=>'trim|required|valid_email' ),
 			array( 'field'=> 'password', 'label'=>'password','rules'=> 'trim|required' )
 	),
+
+	'conversation_post' => array(
+			array( 'field'=> 'user_case', 'label'=>'user_case','rules'=>'trim|required' ),
+			array( 'field'=> 'answer', 'label'=>'answer','rules'=> 'trim' ),
+			array( 'field'=> 'answer_quick_replies', 'label'=>'answer_quick_replies','rules'=> 'trim' )
+	),
 );
 
 

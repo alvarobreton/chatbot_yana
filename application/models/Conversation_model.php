@@ -13,7 +13,7 @@ class Conversation_model  extends CI_Model  {
     public function getConversation()
     {
         $response['success']        = FALSE;
-        $response['message']    = "Incorrect username or password";
+        $response['message']        = "Communication error";
         $result = $this->db->where('email', $this->getEmail())
                     ->get($this->getTable());
     }

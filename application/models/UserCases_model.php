@@ -40,7 +40,7 @@ class UserCases_model  extends CI_Model  {
         $query = "	SELECT c.`*`, u.email, u.name FROM {$this->getTable()} uc
                     INNER JOIN cases c ON c.id = uc.case_id
                     INNER JOIN users u ON u.id = uc.user_id
-                    WHERE uc.user_id = {$this->getUserId()} ";
+                    WHERE uc.user_id = {$this->getUserId()} AND uc.case_id = {$this->getCaseId()} ";
 
         $result = $this->db->query($query)->row();
 
