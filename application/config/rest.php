@@ -62,7 +62,7 @@ $config['rest_supported_formats'] = [
 | The field name for the status inside the response
 |
 */
-$config['rest_status_field_name'] = 'status';
+$config['rest_status_field_name'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -288,7 +288,7 @@ $config['rest_ip_blacklist'] = '';
 | if you have any of these features enabled
 |
 */
-$config['rest_database_group'] = 'global';
+$config['rest_database_group'] = 'default';
 
 /*
 |--------------------------------------------------------------------------
