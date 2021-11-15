@@ -5,6 +5,7 @@ class Users_model  extends CI_Model  {
     protected $email = '';
     protected $password = '';
     protected $name = '';
+    protected $api = '';
 
     private $table = '';
 
@@ -48,6 +49,16 @@ class Users_model  extends CI_Model  {
     public function getTable()
     {
         return $this->table;
+    }
+
+    public function setApi($api)
+    {
+        $this->api = $api;
+    }
+
+    public function getApi()
+    {
+        return $this->api;
     }
 
     public function login()
@@ -98,8 +109,17 @@ class Users_model  extends CI_Model  {
             }
         }
 
-        
         return $response;
+    }
+
+    public function getUser()
+    {
+        $query = "SELECT * FROM {$this->getTable()} u 
+        INNER JOIN `keys` k ON k.user_id = u.id
+        WHERE (k.`key` = '{$this->getApi()}' OR u.email = '{$this->getEmail()}' )";
+        $result = $this->db->query($query);
+
+        return $result->row();
     }
 }
 
