@@ -32,7 +32,8 @@ class Bot extends RestController {
 
         if ($this->form_validation->run('conversation_post')) 
         {
-            $user_case = $this->input->post('user_case');
+            $user_case      = $this->input->post('user_case');
+            $user_response  = $this->input->post('response');
             $users = new Users_model();
             $users->setApi($api);
 
@@ -54,8 +55,36 @@ class Bot extends RestController {
                 {
                     #conversation
                     $status = 200;
+                    $conversation = new Conversation_model();
+                    $conversation->setUserCaseId($user_case);
+                    $result = $conversation->getConversation();
 
-                    
+                    if(empty($result['conversations']))
+                    {
+                        $conversation->setOrder(1);
+                        $response = $conversation->createConversationBot();
+
+
+                        // get conversation
+                        $response = $conversation->getConversation();
+                    }
+                    else 
+                    {
+                        if(!empty($user_response))
+                        {
+                            $conversation->setUserResponse($user_response);
+                            $conversation->createConversation();
+                            $response = $conversation->checkAnswer();
+                            $conversation->setOrder($response['order']);
+                            $conversation->setQuickRepliesId($response['quickreplies_id']);
+                            $conversation->createConversationBot();
+                        }
+
+                        
+                        
+                        // get conversation
+                        $response = $conversation->getConversation();
+                    }
 
                 }
             }

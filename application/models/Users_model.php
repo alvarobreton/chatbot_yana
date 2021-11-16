@@ -66,7 +66,7 @@ class Users_model  extends CI_Model  {
         $response['success']        = FALSE;
         $response['message']    = "Incorrect username or password";
         $result = $this->db->where('email', $this->getEmail())
-                    ->get($this->getTable());
+                            ->get($this->getTable());
 
         if($result->row())
         {
@@ -101,7 +101,7 @@ class Users_model  extends CI_Model  {
             if($result)
             {
                 $response = array(
-                    'success'           =>  FALSE,
+                    'success'           =>  TRUE,
                     'affected_rows' =>  $this->db->affected_rows(),
                     'message'       =>  'Record inserted successfully',
                     'insert_id'     =>  $this->db->insert_id(),
