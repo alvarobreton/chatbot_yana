@@ -20,7 +20,7 @@ class Bot extends RestController {
      * @method: POST
      * Endpoint: http://localhost/chatbot_yana/bot/conversation
      * Headers: X-API-KEY = It is obtained from the database [Table: keys]
-     * Body form-data: email, password
+     * Body form-data: user_case, response
      * Status documentation: https://restfulapi.net/http-status-codes/
      * 
      * Desarrolla un endpoint que maneje la lógica conversacional entre el usuario y la máquina.
