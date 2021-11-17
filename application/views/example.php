@@ -10,13 +10,15 @@ foreach($css_files as $file): ?>
 </head>
 <body>
 	<div>
-		<a href='<?php echo site_url('examples/customers_management')?>'>Customers</a> |
-		<a href='<?php echo site_url('examples/orders_management')?>'>Orders</a> |
-		<a href='<?php echo site_url('examples/products_management')?>'>Products</a> |
-		<a href='<?php echo site_url('examples/offices_management')?>'>Offices</a> | 
-		<a href='<?php echo site_url('examples/employees_management')?>'>Employees</a> |		 
-		<a href='<?php echo site_url('examples/film_management')?>'>Films</a> |
-		<a href='<?php echo site_url('examples/multigrids')?>'>Multigrid [BETA]</a>
+		<a href='<?php echo site_url('welcome')?>'>Casos</a> | 
+		<a href='<?php echo site_url('welcome/conversations')?>'>Conversaciones</a> | 
+		<a href='<?php echo site_url('welcome/users')?>'> Usuarios</a> | 
+		<a href='<?php echo site_url('welcome/keys')?>'>API keys</a> | 
+		<a href='<?php echo site_url('welcome/logs')?>'>API logs</a> | |
+		<a href='<?php echo site_url('welcome/questions_bot')?>'>Preguntas Bot</a> | 
+		<a href='<?php echo site_url('welcome/quick_replies')?>'>Respuestas sugeridas</a> | 
+		<a href='<?php echo site_url('welcome/user_cases')?>'>Relación usuario caso</a>
+
 		
 	</div>
 	<div style='height:20px;'></div>  
@@ -26,5 +28,7 @@ foreach($css_files as $file): ?>
     <?php foreach($js_files as $file): ?>
         <script src="<?php echo $file; ?>"></script>
     <?php endforeach; ?>
+
+
 </body>
 </html>
